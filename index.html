@@ -4,12 +4,20 @@
     <meta charset="utf-8">
     <title>Welcome to Firebase Hosting</title>
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <style>
+      .hide {
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <pre id="object">
-    </pre>
-    <ul id="list">
-    </ul>
-    <script src="app.js"></script>
+    <div class="container">
+      <input id="txtEmail" type="email" placeholder="Email">
+      <input id="txtPassword" type="password" placeholder="Password">
+      <button id="btnLogin" class="btn btn-action">Log In</button>
+      <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
+      <button id="btnLogout" class="btn btn-action hide">Log Out</button>
+    </div>
+    <script src="auth.js"></script>
   </body>
 </html>
