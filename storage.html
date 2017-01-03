@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Firebase Hosting</title>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <progress value="0" max="100" id="uploader">0%</progress>
+    <input type="file" value="upload" id="fileButton" />
+    <script src="storage.js"></script>
+    <script>
+      // Initialize Firebase
+      const config = {
+        apiKey: "AIzaSyBaCnPFqjJ9fRobOmWbT-10DSyQ9xakWw8",
+        authDomain: "fir-test-3d4fc.firebaseapp.com",
+        databaseURL: "https://fir-test-3d4fc.firebaseio.com",
+        storageBucket: "fir-test-3d4fc.appspot.com",
+        messagingSenderId: "1070702292556"
+      };
+      firebase.initializeApp(config);
+
+      // Get Elements
+      const uploader = document.getElementById('uploader');
+      const fileButton = document.getElementById('fileButton');
+
+      // Listen for file selection
+      fileButton.addEventListener('change', e => {
+        // Get file
+        const file = e.target.files[0];
+
+        // Create a storage ref
+        const storageRef = firebase.storage().ref(`sweet_gifs/${file.name}`);
+
+        // Upload file
+        const task = storageRef.put(file); // .put returns an upload task
+
+        // Update Progress bar
+        task.on('state_changed', 
+          function progress(snapshot) {
+            const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          function error(err) {
+
+          },
+          function complete() {
+
+          }
+        );
+
+
+      });
+
+
+    </script>
+  </body>
+</html>
